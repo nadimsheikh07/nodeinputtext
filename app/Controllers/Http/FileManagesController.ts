@@ -46,6 +46,7 @@ export default class FileManagesController {
     await fs.writeFileSync('output1.txt', outputText)
     return {
       message: 'Input 1 Successfully',
+      output
     }
   }
   public async input2 ({ request }) {
@@ -72,7 +73,7 @@ export default class FileManagesController {
     let output=[]
     for (let i = 0; i < input2.length; i++) {
       if(input2[i]){
-        output.push(input2[i] any)
+        output.push(input2[i])
       }
       if(input1){
         if(input1[i]){
@@ -92,6 +93,7 @@ export default class FileManagesController {
 
     return {
       message: 'Input 2 Successfully',
+      output
     }
   }
 }
