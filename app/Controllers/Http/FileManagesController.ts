@@ -16,13 +16,23 @@ export default class FileManagesController {
     let input1=JSON.parse(input1Json)
     let input2=JSON.parse(input2Json)
 
+    if(!input1.includes(request.param('id'))){
+      input1.push(request.param('id'))
+    }
+    // create input json to manage state
+    await fs.writeFileSync('input1.json', JSON.stringify(input1))
+
     // binding array
     let output=[]
     for (let i = 0; i < input1.length; i++) {
       if(i % 2 === 0){
-        output.push(input1[i])
+        if(input1[i]){
+          output.push(input1[i])
+        }
       }else{
-        output.push(input2[i])
+        if(input2[i]){
+          output.push(input2[i])
+        }
       }
     }
 
@@ -32,12 +42,6 @@ export default class FileManagesController {
     output.forEach(element => {
       outputText+=`${element}\n`
     })
-
-    if(!input1.includes(request.param('id'))){
-      input1.push(request.param('id'))
-    }
-    // create input json to manage state
-    await fs.writeFileSync('input1.json', JSON.stringify(input1))
 
     await fs.writeFileSync('output1.txt', outputText)
     return {
@@ -58,11 +62,23 @@ export default class FileManagesController {
     let input1=JSON.parse(input1Json)
     let input2=JSON.parse(input2Json)
 
+    if(!input2.includes(request.param('id'))){
+      input2.push(request.param('id'))
+    }
+    // create input json to manage state
+    await fs.writeFileSync('input2.json', JSON.stringify(input2))
+
     // binding array
     let output=[]
     for (let i = 0; i < input2.length; i++) {
-      output.push(input2[i])
-      output.push(input1[i])
+      if(input2[i]){
+        output.push(input2[i] any)
+      }
+      if(input1){
+        if(input1[i]){
+          output.push(input1[i])
+        }
+      }
     }
 
     // bind output text
@@ -71,12 +87,6 @@ export default class FileManagesController {
     output.forEach(element => {
       outputText+=`${element}\n`
     })
-
-    if(!input2.includes(request.param('id'))){
-      input2.push(request.param('id'))
-    }
-    // create input json to manage state
-    await fs.writeFileSync('input2.json', JSON.stringify(input2))
 
     await fs.writeFileSync('output2.txt', outputText)
 
